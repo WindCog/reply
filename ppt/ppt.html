@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      #wrap {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        /* margin: 200px auto 0; */
+      }
+      #wrap .img {
+        width: 100%;
+        height: 100%;
+      }
+
+      #wrap .img img {
+        opacity: 0;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        transition: opacity 0.7s ease 0s;
+      }
+
+      #wrap .img img.show {
+        opacity: 1;
+      }
+
+      #wrap a {
+        position: absolute;
+        top: 50%;
+        transform: translate(0, -50%);
+        display: block;
+        width: 40px;
+        height: 70px;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        user-select: none;
+        font-size: 30px;
+        text-align: center;
+        line-height: 70px;
+        text-decoration: none;
+      }
+
+      #wrap a.left {
+        left: 0;
+      }
+
+      #wrap a.right {
+        right: 0;
+      }
+
+      .toggle {
+        display: none;
+        justify-content: space-between;
+        align-items: center;
+        width: 400px;
+        height: 70px;
+        /* background-color: pink; */
+        margin: 30px auto 0;
+      }
+
+      .toggle p {
+        width: 150px;
+        height: 70px;
+        background-color: rgba(0, 0, 0, 0.7);
+        text-align: center;
+        line-height: 70px;
+        color: #fff;
+        cursor: pointer;
+        user-select: none;
+        font-size: 20px;
+      }
+
+      .toggle p.active {
+        background-color: tomato;
+      }
+      .arrow{
+        opacity: 0.1;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wrap">
+      <div class="img">
+        <img src="1.png" alt="" class="show" />
+        <img src="2.png" alt="" />
+        <img src="3.png" alt="" />
+        <img src="4.png" alt="" />
+        <img src="5.png" alt="" />
+        <img src="6.png" alt="" />
+        <img src="7.png" alt="" />
+        <img src="8.png" alt="" />
+        <img src="9.png" alt="" />
+        <img src="10.png" alt="" />
+        <img src="11.png" alt="" />
+        <img src="12.png" alt="" />
+        <img src="13.png" alt="" />
+        <img src="14.png" alt="" />
+        <img src="15.png" alt="" />
+        <img src="16.png" alt="" />
+        <img src="17.png" alt="" />
+        <img src="18.png" alt="" />
+        <img src="19.png" alt="" />
+        <img src="20.png" alt="" />
+      </div>
+
+      <div class="arrow">
+        <a href="javascript:;" class="left">&lt;</a>
+        <a href="javascript:;" class="right">&gt;</a>
+      </div>
+    </div>
+
+    <div class="toggle">
+      <p class="active">单边切换</p>
+      <p>循环切换</p>
+    </div>
+
+    <script>
+      // 获取左右按钮和图片
+      let oLeft = document.querySelector("#wrap .arrow .left"),
+        oRight = document.querySelector("#wrap .arrow .right"),
+        aImg = document.querySelectorAll("#wrap .img img");
+
+      let aP = document.querySelectorAll(".toggle p");
+
+      // 获取图片的数量长度  便于后期的维护
+      let len = aImg.length; // 5
+
+      // 定义变量  知道当前是第几张显示
+      let index = 0;
+
+      //  人为规定一个布尔值  为后面代码提供逻辑参考 true是单边  false是循环
+      let mode = true;
+
+
+      aP[0].onclick = function () {
+        this.classList.add("active");
+        aP[1].classList.remove("active");
+        mode = true;
+      };
+
+      aP[1].onclick = function () {
+        this.classList.add("active");
+        aP[0].classList.remove("active");
+        mode = false;
+      };
+
+      // 左按钮
+      oLeft.onclick = function () {
+        if (mode) {
+          if (index > 0) {
+            // 给前一张移除类名
+            aImg[index].classList.remove("show");
+
+            // 变量 - 1
+            index--;
+            // console.log(index);
+
+            // 给新图添加类名
+            aImg[index].classList.add("show");
+          }
+        } else {
+          // 给当前这一张移除类名
+          aImg[index].classList.remove("show");
+
+          // 变量 - 1
+          index--;
+
+          if (index == -1) index = len - 1;
+
+          // console.log(index);
+
+          // 给新图添加类名
+          aImg[index].classList.add("show");
+        }
+      };
+
+      // 右按钮
+      oRight.onclick = function () {
+        if (mode) {
+          if (index < len - 1) {
+            //图片的长度 -1 是最大图片的下标
+            // 给前一张移除类名
+            aImg[index].classList.remove("show");
+
+            // 变量 + 1
+            index++;
+            // console.log(index);
+
+            // 给新图添加类名
+            aImg[index].classList.add("show");
+          }
+        } else {
+          aImg[index].classList.remove("show");
+
+          // 变量 + 1
+          index++;
+
+          // if (index == len)   index = 0;
+
+          index %= len;
+
+          // 给新图添加类名
+          aImg[index].classList.add("show");
+        }
+      };
+    </script>
+  </body>
+</html>

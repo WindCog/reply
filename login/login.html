@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+
+    <title>登录</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+
+<!-- <canvas id="canvas"></canvas> -->
+<body>
+    <div class="front">
+        <div class="container">
+    
+            <form action="/login" method="post">
+                <div class="login-box">
+                    <h2 class="login-title">
+                        <span>已有账号，去</span>登 录
+                    </h2>
+                    <div class="input-box">
+                        <input name="username" type="text" placeholder="用户名">
+                        <input name="password" type="password" placeholder="密码">
+                        <!-- <input type="password" placeholder="确认密码"> -->
+                    </div>
+                    <button id = "a"><a href="http://www.windcog.top">登 录</a></button>
+                </div>
+            </form>
+
+            <!-- <form action="/login" method="post"> -->
+                <div class="register-box slide-up">
+                    <div class="center">
+                        <h2 class="register-title">
+                            <span>没有账号，去</span>注 册
+                        </h2>
+                        <div class="input-box">
+                            <input name="username" type="text" placeholder="用户名">
+                            <input name="password" type="password" placeholder="密码">
+           
+                        </div>
+                        <button id="b">注 册</button>
+                    </div>
+                </div>
+            <!-- </form> -->
+            </div>
+    </div>
+    <script>
+        let b = document.getElementById('b')
+        b.addEventListener('click',()=>{
+            alert('注册成功')
+        })
+    
+    </script>
+
+    <script src="login.js"></script>
+    <script src="background.js"></script>
+</body>
+
+</html>
